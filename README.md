@@ -1,4 +1,4 @@
-# USAGE
+# Usage:
 
 ```
 usage: xdg-mk-desktop.py [-h] -n NAME -g GENERIC_NAME -e EXECUTABLE -i ICON -m
@@ -23,3 +23,8 @@ optional arguments:
 ## example:
 
     xdg-mk-desktop.py -n "My Name" -g "My generic name" -e /usr/bin/x-terminal-emulator -i /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg -m "open terminal" -c system my_term.desktop
+
+
+# Further:
+
+https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/
