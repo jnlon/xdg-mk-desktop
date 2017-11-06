@@ -1,7 +1,7 @@
 # Usage:
 
 ```
-usage: xdg-mk-desktop.py [-h] -n NAME -g GENERIC_NAME -e EXECUTABLE -i ICON -m
+usage: xdg-mk-desktop [-h] -n NAME -g GENERIC_NAME -e EXECUTABLE -i ICON -m
                          COMMENT -c CATEGORIES
                          filename
 
@@ -22,7 +22,7 @@ optional arguments:
 
 ## example:
 
-    xdg-mk-desktop.py -n "My Name" -g "My generic name" -e /usr/bin/x-terminal-emulator -i /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg -m "open terminal" -c system my_term.desktop
+    xdg-mk-desktop -n "My Name" -g "My generic name" -e /usr/bin/x-terminal-emulator -i /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg -m "open terminal" -c system my_term.desktop
 
 
 # Further:
