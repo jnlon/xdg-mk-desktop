@@ -24,7 +24,16 @@ optional arguments:
 
     xdg-mk-desktop -n "My Name" -g "My generic name" -e /usr/bin/x-terminal-emulator -i /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg -m "open terminal" -c system my_term.desktop
 
+You still have to put this file somewhere to be available on your system, ex: ~/.local/share/applications/
+
+# Requirements:
+* pip: pyxdg
+* CentOS: python2-pyxdg.noarch
+* Debian: python-xdg
 
 # Further:
 
 https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/
+
+---
+_made with ❤_
