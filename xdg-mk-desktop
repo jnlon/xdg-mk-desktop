@@ -28,28 +28,33 @@ categories = ["AudioVideo", "Audio", "Video", "Development", "Education", "Game"
 
 parser = argparse.ArgumentParser(description="This program will help you to create a .desktop file.")
 parser.add_argument("-n", "--name", required=True)
-parser.add_argument("-g", "--generic_name", required=True)
-parser.add_argument("-e", "--executable", type=argparse.FileType("x"), required=True)
-parser.add_argument("-i", "--icon", type=argparse.FileType("r"), required=True)
-parser.add_argument("-m", "--comment", required=True)
+parser.add_argument("-g", "--generic_name", required=False)
+parser.add_argument("-e", "--executable", required=True)
+parser.add_argument("-i", "--icon", required=True)
+parser.add_argument("-m", "--comment", required=False)
 parser.add_argument("-c", "--categories", required=True)
 parser.add_argument("filename")
+
 try:
     args = parser.parse_args()
 except IOError as e:
     print(e)
     sys.exit(e.errno)
+
 file_name = args.filename
 if not file_name.endswith(".desktop"):
     file_name += ".desktop"
+
 de = DesktopEntry(file_name)
 de.set("Name", args.name)
-de.set("GenericName", args.generic_name)
-de.set("Exec", args.executable.name)
-de.set("Icon", args.icon.name)
-de.set("Comment", args.comment)
-#de.set("Categories", ';'.join(map(str.capitalize, args.categories.split(';'))))
+de.set("Exec", args.executable)
+de.set("Icon", args.icon)
 de.set("Categories", args.categories)
+if hasattr(args, "generic_name"):
+    de.set("GenericName", args.generic_name)
+if hasattr(args, "comment"):
+    de.set("Comment", args.comment)
+
 try:
     de.validate()
     de.write()
@@ -59,11 +64,11 @@ except IOError as e:
     sys.exit(e.errno)
 except ValidationError as e:
     print(e)
-    if "is not a registered Category" in e.message:
-        print("\nValid categories:")
-        print("-----------------")
-        print("\n".join(sorted(categories)))
-        print("\nOr anything that starting with 'X-'")
+    #if "is not a registered Category" in e.message:
+    #    print("\nValid categories:")
+    #    print("-----------------")
+    #    print("\n".join(sorted(categories)))
+    #    print("\nOr anything that starting with 'X-'")
     sys.exit(45)
 except Exception as e:
     print(e)
