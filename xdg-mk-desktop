@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from xdg.DesktopEntry import DesktopEntry
 from xdg.Exceptions import ValidationError
 import argparse
@@ -29,15 +29,15 @@ categories = ["AudioVideo", "Audio", "Video", "Development", "Education", "Game"
 parser = argparse.ArgumentParser(description="This program will help you to create a .desktop file.")
 parser.add_argument("-n", "--name", required=True)
 parser.add_argument("-g", "--generic_name", required=True)
-parser.add_argument("-e", "--executable", type=file, required=True)
-parser.add_argument("-i", "--icon", type=file, required=True)
+parser.add_argument("-e", "--executable", type=argparse.FileType("x"), required=True)
+parser.add_argument("-i", "--icon", type=argparse.FileType("r"), required=True)
 parser.add_argument("-m", "--comment", required=True)
 parser.add_argument("-c", "--categories", required=True)
 parser.add_argument("filename")
 try:
     args = parser.parse_args()
 except IOError as e:
-    print e
+    print(e)
     sys.exit(e.errno)
 file_name = args.filename
 if not file_name.endswith(".desktop"):
@@ -55,16 +55,16 @@ try:
     de.write()
     sys.exit(0)
 except IOError as e:
-    print e
+    print(e)
     sys.exit(e.errno)
 except ValidationError as e:
-    print e
+    print(e)
     if "is not a registered Category" in e.message:
-        print "\nValid categories:"
-        print "-----------------"
-        print "\n".join(sorted(categories))
-        print "\nOr anything that starting with 'X-'"
+        print("\nValid categories:")
+        print("-----------------")
+        print("\n".join(sorted(categories)))
+        print("\nOr anything that starting with 'X-'")
     sys.exit(45)
 except Exception as e:
-    print e
+    print(e)
     sys.exit(1)
